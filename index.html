@@ -1,1 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Credit Card Validator</title>
+  <style>
+    /* Body styling with a warm background color blend */
+    body {
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4); /* Warm color blend */
+      background-blend-mode: screen;
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    /* Page container styling */
+    .page {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.5s ease;
+      opacity: 0;
+      z-index: 0;
+    }
+
+    .page.active {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    /* Home page styling */
+    #home {
+      text-align: center;
+      padding: 20px;
+    }
+
+    #home h1 {
+      font-size: 4em; /* Increased font size */
+      color: #fff;
+      margin-bottom: 30px;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    #home .button-container {
+      opacity: 0;
+      transition: opacity 1s ease-in-out 1s;
+    }
+
+    #home .button-container .button {
+      background-color: #2575fc;
+      color: #fff;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.5em; /* Increased button font size */
+      margin: 10px;
+      transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+    }
+
+    #home .button-container .button:hover {
+      background-color: #1b5dcc;
+      transform: scale(1.05);
+    }
+
+    #home .developer-text {
+      margin-top: 30px;
+      color: #fff;
+      font-size: 1.2em;
+    }
+
+    /* Heading and button appear on page load */
+    .page#home.active h1,
+    .page#home.active .button-container {
+      opacity: 1;
+    }
+
+    /* Validation page styling */
+    .container {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 2.5em; /* Increased font size */
+      margin-bottom: 30px;
+      color: #2575fc;
+    }
+
+    label {
+      font-size: 1.2em; /* Larger font size for label */
+      margin-bottom: 15px; /* Space between label and input field */
+      display: block;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      font-size: 1.2em; /* Increased font size for input */
+      letter-spacing: 2px;
+    }
+
+    input[type="text"]:focus {
+      border-color: #2575fc;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      outline: none;
+    }
+
+    input[type="submit"] {
+      background-color: #2575fc;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.2em; /* Increased font size for submit button */
+      opacity: 0;
+      visibility: hidden;
+      transition: background-color 0.3s ease, transform 0.2s ease-in-out, opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    input[type="submit"].show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #1b5dcc;
+      transform: scale(1.05);
+    }
+
+    #result {
+      font-size: 1.5em; /* Increased font size for result text */
+      margin-top: 20px;
+    }
+
+    .button-container button {
+      background-color: #2575fc;
+      color: #fff;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.5em; /* Increased button font size */
+      margin: 10px;
+      transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+    }
+
+    .button-container button:hover {
+      background-color: #1b5dcc;
+      transform: scale(1.05);
+    }
+
+    /* Responsive media query */
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 2em;
+      }
+
+      label {
+        font-size: 1em;
+        margin-bottom: 10px;
+      }
+
+      input[type="text"], input[type="submit"] {
+        font-size: 1em;
+      }
+
+      #result {
+        font-size: 1.2em;
+      }
+    }
+  </style>
+  <!-- Adding Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Home Page -->
+  <div id="home" class="page active">
+    <div>
+      <h1>Credit Card Validator System</h1>
+      <div class="button-container">
+        <button class="button" onclick="showValidationPage()">Enter</button>
+      </div>
+      <div class="developer-text">Developed by Rounak Raj</div>
+    </div>
+  </div>
+
+  <!-- Validation Page -->
+  <div id="validation" class="page">
+    <div class="container">
+      <h1>Credit Card Validator</h1>
+      <form id="cardForm">
+        <label for="cardNumber">Enter Credit Card Number:</label>
+        <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCardNumber(this);">
+        <input type="submit" value="Validate" id="validateButton">
+      </form>
+      <p id="result"></p>
+      <div class="button-container">
+        <button class="button" onclick="showHomePage()">Back</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showValidationPage() {
+      document.getElementById('home').classList.remove('active');
+      document.getElementById('validation').classList.add('active');
+    }
+
+    function showHomePage() {
+      document.getElementById('validation').classList.remove('active');
+      document.getElementById('home').classList.add('active');
+    }
+
+    function formatCardNumber(input) {
+      let cleaned = input.value.replace(/\D/g, '').slice(0, 16); // Remove all non-digits and limit to 16 digits
+      let formatted = cleaned.match(/.{1,4}/g)?.join(' '); // Add space every 4 digits
+      input.value = formatted ?? ''; // Set formatted value back to input
+      
+      // Show or hide the validate button based on the number of digits
+      const validateButton = document.getElementById('validateButton');
+      if (cleaned.length === 16) {
+        validateButton.classList.add('show');
+      } else {
+        validateButton.classList.remove('show');
+      }
+    }
+
+    function validateCardNumber(cardNumber) {
+      const cleanedNumber = cardNumber.replace(/\s+/g, ""); // Remove spaces
+
+      if (cleanedNumber.length !== 16) {
+        return false;
+      }
+
+      let sum = 0;
+      let isSecondDigit = false;
+      for (let i = cleanedNumber.length - 1; i >= 0; i--) {
+        let digit = parseInt(cleanedNumber[i]);
+
+        if (isSecondDigit) {
+          digit = digit * 2;
+          if (digit > 9) {
+            digit = digit % 10 + Math.floor(digit / 10);
+          }
+        }
+        sum += digit;
+        isSecondDigit = !isSecondDigit;
+      }
+
+      return (sum % 10) === 0;
+    }
+
+    document.getElementById('cardForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const cardNumber = document.getElementById('cardNumber').value;
+
+      if (validateCardNumber(cardNumber)) {
+        document.getElementById('result').textContent = "Hooray! You have a valid card";
+        document.getElementById('result').style.color = "#28a745";
+      } else {
+        document.getElementById('result').textContent = "Oops!! Looks like your card's invalid";
+        document.getElementById('result').style.color = "#dc3545";
+      }
+
+      // Reset input field after validation
+      document.getElementById('cardNumber').value = '';
+      document.getElementById('validateButton').classList.remove('show');
+    });
+  </script>
+</body>
+</html>
 
