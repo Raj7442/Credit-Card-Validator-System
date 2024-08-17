@@ -1,27 +1,27 @@
-The Credit Card Validator System is a web application that validates credit card numbers using the Luhn algorithm. The system consists of a backend service implemented in Go and a frontend user interface using HTML, CSS, and JavaScript. This README provides an overview of the project's components, setup instructions, and how to run the application.
+Credit Card Validator System
+Overview
+This project implements a Credit Card Validator System with a frontend interface built using HTML, CSS, and JavaScript, and a backend server written in Go. The system validates credit card numbers using the Luhn algorithm and provides immediate feedback on the card's validity.
 
-Tech Stack
+Technology Stack
 Frontend: HTML, CSS, JavaScript
-Backend: Go (Golang)
-Algorithm: Luhn Algorithm for credit card validation
+Backend: Go
+Validation Algorithm: Luhn Algorithm
+Data Format: JSON
+HTTP Server: Go’s net/http package
 Features
-Credit Card Validation: Validates credit card numbers using the Luhn algorithm.
-Responsive Design: Mobile-friendly interface with warm background colors and smooth transitions.
-User Interface: Two pages with transitions, validation messages, and formatted input for credit card numbers.
-
+Credit Card Validation: Uses the Luhn algorithm to validate credit card numbers.
+Responsive UI: User-friendly interface with a warm gradient background and smooth transitions.
+Dynamic Validation: Provides real-time feedback on card validity.
 Backend Implementation
-The backend of the Credit Card Validator System is implemented in Go and performs credit card validation using the Luhn algorithm. It handles HTTP GET requests with JSON payloads, processes the credit card number, and returns validation results.
-
-Implementation Steps
 Luhn Algorithm: Validates credit card numbers to ensure they meet the Luhn checksum requirement.
 
-HTTP Server: An HTTP server is created using Go’s net/http package.
+HTTP Server: Created using Go’s net/http package.
 
-Request Handling: The server is configured to handle GET requests with JSON payloads.
+Request Handling: Configured to handle GET requests with JSON payloads.
 
 JSON Payload Handling:
 
-Validation: Accepts valid JSON requests; rejects invalid ones with a 400 status code.
+Validation: Accepts valid JSON requests; rejects invalid ones with an HTTP 400 status code.
 Extraction: Extracts the credit card number from the JSON payload.
 Validation and Response:
 
