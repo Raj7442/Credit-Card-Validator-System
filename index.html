@@ -65,7 +65,7 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      font-size: 1.5em; /* Increased button font size */
+      font-size: 1.5em; 
       margin: 10px;
       transition: background-color 0.3s ease, transform 0.2s ease-in-out;
     }
@@ -81,13 +81,12 @@
       font-size: 1.2em;
     }
 
-    /* Heading and button appear on page load */
+    
     .page#home.active h1,
     .page#home.active .button-container {
       opacity: 1;
     }
 
-    /* Validation page styling */
     .container {
       background: #ffffff;
       padding: 30px;
@@ -99,14 +98,14 @@
     }
 
     h1 {
-      font-size: 2.5em; /* Increased font size */
+      font-size: 2.5em; 
       margin-bottom: 30px;
       color: #2575fc;
     }
 
     label {
-      font-size: 1.2em; /* Larger font size for label */
-      margin-bottom: 15px; /* Space between label and input field */
+      font-size: 1.2em; 
+      margin-bottom: 15px; 
       display: block;
     }
 
@@ -117,7 +116,7 @@
       border: 1px solid #ddd;
       border-radius: 5px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      font-size: 1.2em; /* Increased font size for input */
+      font-size: 1.2em; 
       letter-spacing: 2px;
     }
 
@@ -134,7 +133,7 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      font-size: 1.2em; /* Increased font size for submit button */
+      font-size: 1.2em; 
       opacity: 0;
       visibility: hidden;
       transition: background-color 0.3s ease, transform 0.2s ease-in-out, opacity 0.3s ease, visibility 0.3s ease;
@@ -151,7 +150,7 @@
     }
 
     #result {
-      font-size: 1.5em; /* Increased font size for result text */
+      font-size: 1.5em; 
       margin-top: 20px;
     }
 
@@ -162,7 +161,7 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      font-size: 1.5em; /* Increased button font size */
+      font-size: 1.5em; 
       margin: 10px;
       transition: background-color 0.3s ease, transform 0.2s ease-in-out;
     }
@@ -239,11 +238,11 @@
     }
 
     function formatCardNumber(input) {
-      let cleaned = input.value.replace(/\D/g, '').slice(0, 16); // Remove all non-digits and limit to 16 digits
-      let formatted = cleaned.match(/.{1,4}/g)?.join(' '); // Add space every 4 digits
-      input.value = formatted ?? ''; // Set formatted value back to input
+      let cleaned = input.value.replace(/\D/g, '').slice(0, 16); 
+      let formatted = cleaned.match(/.{1,4}/g)?.join(' '); 
+      input.value = formatted ?? ''; 
       
-      // Show or hide the validate button based on the number of digits
+
       const validateButton = document.getElementById('validateButton');
       if (cleaned.length === 16) {
         validateButton.classList.add('show');
@@ -253,7 +252,7 @@
     }
 
     function validateCardNumber(cardNumber) {
-      const cleanedNumber = cardNumber.replace(/\s+/g, ""); // Remove spaces
+      const cleanedNumber = cardNumber.replace(/\s+/g, ""); 
 
       if (cleanedNumber.length !== 16) {
         return false;
@@ -289,7 +288,7 @@
         document.getElementById('result').style.color = "#dc3545";
       }
 
-      // Reset input field after validation
+
       document.getElementById('cardNumber').value = '';
       document.getElementById('validateButton').classList.remove('show');
     });
